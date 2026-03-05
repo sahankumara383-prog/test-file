@@ -1,0 +1,1558 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0f172a">
+
+    <title>FMC GPA Calculator – BSc MIT, BBA & BCom | SEUSL</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* =========================================
+         1. CORE VARIABLES & DARK THEME
+         ========================================= */
+      :root {
+          /* Brand Identity - Brightened slightly for dark mode contrast */
+          --primary: #9d4edd;
+          --primary-dark: #7b2cbf;
+          --secondary: #c77dff;
+          --accent: #e0aaff;
+
+          --gradient-main: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
+
+          /* Dark Theme Colors */
+          --bg-body: #0f172a;
+          --bg-glass: rgba(30, 41, 59, 0.7);
+          --bg-card: #1e293b;
+          --text-main: #f8fafc;
+          --text-muted: #94a3b8;
+          --border: rgba(255, 255, 255, 0.1);
+          --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+          --nav-bg: rgba(15, 23, 42, 0.95);
+          --hover-bg: rgba(255, 255, 255, 0.05);
+      }
+
+      /* Bootstrap Overrides to strictly keep HTML classes untouched while maintaining dark theme */
+      .bg-white { background-color: var(--bg-card) !important; }
+      .text-dark { color: var(--text-main) !important; }
+      .text-secondary { color: #cbd5e1 !important; }
+      .border-light { border-color: var(--border) !important; }
+
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          transition: all 0.3s ease;
+      }
+
+      body {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          background-color: var(--bg-body);
+          color: var(--text-main);
+          overflow-x: hidden;
+          position: relative;
+          animation: smoothFadeIn 0.8s ease-out forwards;
+      }
+
+      html {
+          scroll-behavior: smooth;
+          color-scheme: dark;
+      }
+
+      a, button {
+          touch-action: manipulation;
+      }
+
+      /* --- SMOOTH LOAD ANIMATION --- */
+      @keyframes smoothFadeIn {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      /* =========================================
+         2. BACKGROUND ANIMATION
+         ========================================= */
+      .ambient-glow {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100vh;
+          z-index: -1;
+          overflow: hidden;
+          pointer-events: none;
+      }
+
+      .orb {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(90px);
+          opacity: 0.25;
+          animation: floatOrb 20s infinite alternate;
+      }
+
+      .orb-1 {
+          top: 0%;
+          left: 5%;
+          width: 45vw;
+          height: 45vw;
+          background: var(--primary);
+      }
+
+      .orb-2 {
+          top: 15%;
+          right: 5%;
+          width: 40vw;
+          height: 40vw;
+          background: var(--secondary);
+          animation-delay: -5s;
+      }
+
+      @keyframes floatOrb {
+          0% { transform: translate(0, 0); }
+          100% { transform: translate(40px, 60px); }
+      }
+
+      /* =========================================
+         3. NAVBAR
+         ========================================= */
+      .navbar {
+          background: var(--nav-bg);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid var(--border);
+          padding: 1rem 0;
+      }
+
+      .navbar-brand {
+          font-weight: 800;
+          font-size: 1.4rem;
+          background: var(--gradient-main);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          letter-spacing: -0.5px;
+      }
+
+      .nav-link {
+          font-weight: 700;
+          color: var(--text-muted) !important;
+          margin: 0 12px;
+          font-size: 0.95rem;
+          padding: 10px 0;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+          color: var(--primary) !important;
+      }
+
+      .btn-primary-custom {
+          background: var(--gradient-main);
+          color: white;
+          border: none;
+          padding: 11px 28px;
+          border-radius: 20px;
+          font-weight: 700;
+          box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+          text-decoration: none;
+          white-space: nowrap;
+          display: inline-block;
+      }
+
+      .btn-primary-custom:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(157, 78, 221, 0.4);
+          color: white;
+      }
+
+      .btn-outline-custom {
+          border: 2px solid var(--primary);
+          background: transparent;
+          color: var(--text-main);
+          padding: 11px 28px;
+          border-radius: 50px;
+          font-weight: 700;
+          text-decoration: none;
+          display: inline-block;
+          transition: all 0.3s;
+      }
+
+      .btn-outline-custom:hover {
+          background: var(--primary);
+          color: white;
+      }
+
+      /* =========================================
+         4. LAYOUT & TYPOGRAPHY SCALING
+         ========================================= */
+      .section-padding { padding: 80px 0; }
+      .section-title { font-weight: 800; font-size: 2.4rem; letter-spacing: -1px; }
+      #academic-hub, #programs { scroll-margin-top: 65px; }
+
+      /* =========================================
+         5. HERO SECTION
+         ========================================= */
+      .hero h1 {
+          font-size: 3.0rem;
+          font-weight: 800;
+          line-height: 1.2;
+          margin-bottom: 20px;
+          background: linear-gradient(135deg, var(--text-main) 30%, var(--primary) 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+      }
+
+      .hero p {
+          font-size: 1.1rem;
+          color: var(--text-muted);
+          margin-bottom: 30px;
+          line-height: 1.6;
+          max-width: 550px;
+      }
+
+      .hero-img-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+      }
+
+      .hero-img {
+          width: 100%;
+          max-width: 350px;
+          height: auto;
+          filter: drop-shadow(0 20px 40px rgba(157, 78, 221, 0.3));
+          animation: floatImage 6s ease-in-out infinite;
+      }
+
+      @keyframes floatImage {
+          0% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+          100% { transform: translateY(0); }
+      }
+
+      .badge-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px;
+          border-radius: 50px;
+          background: rgba(157, 78, 221, 0.15);
+          color: var(--secondary);
+          font-weight: 700;
+          font-size: 0.9rem;
+          margin-bottom: 20px;
+          border: 1px solid rgba(157, 78, 221, 0.3);
+      }
+
+      /* =========================================
+         6. CARDS & UTILITIES
+         ========================================= */
+      .glass-card {
+          background: var(--bg-glass);
+          backdrop-filter: blur(24px) saturate(180%);
+          -webkit-backdrop-filter: blur(24px) saturate(180%);
+          border: 1px solid var(--border);
+          border-radius: 32px;
+          padding: 40px 32px;
+          height: 100%;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          box-shadow: var(--shadow);
+          cursor: pointer;
+      }
+
+      .glass-card:hover {
+          transform: translateY(-12px) scale(1.02);
+          background: rgba(30, 41, 59, 0.9);
+          border-color: rgba(157, 78, 221, 0.4);
+          box-shadow: 0 30px 60px -12px rgba(157, 78, 221, 0.25);
+      }
+
+      .card-icon {
+          width: 68px;
+          height: 68px;
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.75rem;
+          color: white;
+          margin: 0 auto 24px auto;
+          box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5);
+          transition: transform 0.4s ease;
+      }
+
+      .glass-card:hover .card-icon { transform: scale(1.1) rotate(-5deg); }
+
+      .glass-card h4 {
+          font-weight: 800;
+          font-size: 1.35rem;
+          margin-bottom: 12px;
+          letter-spacing: -0.5px;
+          text-align: center;
+      }
+
+      .glass-card p {
+          color: var(--text-muted);
+          font-size: 0.95rem;
+          line-height: 1.6;
+          margin-bottom: 30px;
+          flex-grow: 1;
+          text-align: center;
+      }
+
+      .card-action {
+          font-weight: 700;
+          font-size: 0.95rem;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          transition: all 0.3s ease;
+          width: 100%;
+      }
+
+      .card-action i { transition: transform 0.3s ease; }
+      .glass-card:hover .card-action i { transform: translateX(6px); }
+
+      /* Colors */
+      .text-bba { color: #f472b6; }
+      .bg-bba { background: linear-gradient(135deg, #EC4899, #DB2777); color: white; }
+      .text-mit { color: #a78bfa; }
+      .bg-mit { background: linear-gradient(135deg, #8B5CF6, #6D28D9); color: white; }
+      .text-bcom { color: #fbbf24; }
+      .bg-bcom { background: linear-gradient(135deg, #F59E0B, #D97706); }
+
+      /* =========================================
+         7. FOOTER
+         ========================================= */
+      footer {
+          margin-top: auto;
+          padding: 20px 0;
+          border-top: 1px solid var(--border);
+          background: rgba(255, 255, 255, 0.02);
+      }
+
+      .footer-link {
+          color: inherit;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.94rem;
+      }
+
+      .developer-name {
+          color: var(--accent);
+          font-weight: 700;
+      }
+
+      /* =========================================
+         8. MODERN DISCLAIMER CARD STYLES
+         ========================================= */
+      .disclaimer-card {
+          padding: 20px;
+          border-radius: 24px;
+          position: relative;
+          overflow: hidden;
+          transform: none !important;
+          cursor: default !important;
+      }
+
+      .disclaimer-card:hover {
+          transform: none !important;
+          box-shadow: var(--shadow) !important;
+      }
+
+      .disclaimer-accent {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 5px;
+          background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      }
+
+      .disclaimer-icon-wrapper {
+          width: 48px;
+          height: 48px;
+          border-radius: 14px;
+          background-color: rgba(245, 158, 11, 0.15);
+          color: #fbbf24;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.4rem;
+      }
+
+      .disclaimer-list { list-style: none; padding: 0; margin: 0; }
+      .disclaimer-list li { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+      .disclaimer-list p { margin: 0; font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; text-align: left; }
+
+      .list-badge {
+          min-width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background-color: rgba(157, 78, 221, 0.15);
+          color: var(--accent);
+          font-weight: 800;
+          font-size: 0.85rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          border: 1px solid rgba(157, 78, 221, 0.3);
+      }
+
+      .official-resource-box {
+          background-color: rgba(30, 41, 59, 0.5);
+          border: 1px dashed var(--border);
+          border-radius: 16px;
+          padding: 24px;
+          transition: all 0.3s ease;
+      }
+
+      .official-resource-box:hover {
+          background-color: rgba(30, 41, 59, 0.8);
+          border-color: var(--primary);
+      }
+
+      .resource-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          background: var(--gradient-main);
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.1rem;
+          flex-shrink: 0;
+      }
+
+      .resource-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: color 0.3s ease; }
+      .resource-link:hover { color: var(--primary); text-decoration: underline; }
+
+      /* =========================================
+         9. ACADEMIC STANDARDS SPECIFIC STYLES
+         ========================================= */
+      .glass-card h4.text-start { text-align: left !important; }
+      .glass-card p.text-start { text-align: left !important; }
+
+      .custom-grading-table th {
+          border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+          font-weight: 600;
+      }
+
+      .custom-grading-table td {
+          padding: 8px 10px;
+          font-size: 0.98rem;
+          font-weight: bold;
+      }
+
+      .grade-badge {
+          min-width: 45px;
+          padding: 6px 10px !important;
+          border-radius: 6px !important;
+      }
+
+      .mobile-roadmap-card {
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+          cursor: pointer;
+      }
+
+      .mobile-roadmap-card:hover {
+          transform: translateY(-12px) scale(1.02);
+          box-shadow: 0 30px 60px -12px rgba(157, 78, 221, 0.2) !important;
+      }
+
+      /* =========================================
+         10. MOBILE RESPONSIVENESS
+         ========================================= */
+      @media (max-width: 991px) {
+          .section-padding { padding: 60px 0; }
+          .hero h1 { font-size: 2.4rem; }
+          .hero p { font-size: 1rem; margin: 0 auto 25px auto; }
+          .navbar-collapse { background: var(--bg-card); padding: 20px; border-radius: 16px; margin-top: 10px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+      }
+
+      @media (max-width: 768px) {
+          .section-padding { padding: 45px 0; }
+          .section-title { font-size: 2rem; }
+          .hero h1 { font-size: 2rem; }
+          .hero-img { max-width: 260px; margin-top: 20px; }
+          .btn-primary-custom, .btn-outline-custom { width: 100%; padding: 12px 20px; }
+          .glass-card { padding: 24px 20px; border-radius: 24px; }
+          .card-icon { width: 55px; height: 55px; font-size: 1.4rem; }
+          .mobile-roadmap-card .card-body { padding: 1.25rem !important; }
+          .mobile-roadmap-card h4 { font-size: 1.2rem !important; }
+          .mobile-roadmap-card h5 { font-size: 1.1rem !important; }
+          
+          /* Table Adjustments */
+          .custom-grading-table td { font-size: 0.85rem; padding: 8px 5px; }
+          .custom-grading-table th { font-size: 0.8rem; padding: 8px 5px; }
+          .grade-badge { min-width: 38px; padding: 4px 8px !important; font-size: 0.75rem; }
+          
+          .official-resource-box { padding: 16px; }
+          .disclaimer-list p { font-size: 0.9rem; }
+          .disclaimer-card { padding: 10px; }
+      }
+
+      @media (max-width: 400px) {
+          .section-title { font-size: 1.75rem; }
+          .hero h1 { font-size: 1.8rem; }
+          .mobile-roadmap-card .row.g-2>div { margin-bottom: 8px; }
+          .table th, .table td { font-size: 0.85rem; padding: 10px 8px !important; }
+      }/* =========================================
+   DARK MODE POLISH & TWEAKS
+   ========================================= */
+
+/* 1. Grade Badge Contrast - Brighter colors for dark backgrounds */
+.grade-badge { font-weight: 700; letter-spacing: 0.5px; }
+.grade-badge.text-success { color: #4ade80 !important; background-color: rgba(74, 222, 128, 0.15) !important; }
+.grade-badge.text-primary { color: #60a5fa !important; background-color: rgba(96, 165, 250, 0.15) !important; }
+.grade-badge.text-warning { color: #fcd34d !important; background-color: rgba(251, 191, 36, 0.15) !important; }
+.grade-badge.text-secondary { color: #c084fc !important; background-color: rgba(192, 132, 252, 0.15) !important; }
+.grade-badge.text-danger { color: #f87171 !important; background-color: rgba(248, 113, 113, 0.15) !important; }
+
+/* 2. Card Separation - Crisper borders and deeper shadows */
+.glass-card, .disclaimer-card {
+    background: rgba(30, 41, 59, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    /* Adds an outer drop shadow and a subtle inner white highlight for depth */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important; 
+}
+
+.glass-card:hover {
+    border-color: rgba(157, 78, 221, 0.5) !important;
+    background: rgba(30, 41, 59, 0.8) !important;
+    box-shadow: 0 12px 40px rgba(157, 78, 221, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure the roadmap cards in the middle share this crisp border */
+.mobile-roadmap-card {
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background-color: var(--bg-card) !important;
+}
+/* =========================================
+   SCHEME OF GRADING TABLE - EXACT DESIGN MATCH
+   ========================================= */
+
+/* 1. Strip the inline yellow styles from the header */
+.custom-grading-table thead {
+    background-color: transparent !important;
+}
+
+.custom-grading-table thead tr {
+    color: var(--text-main) !important;
+}
+
+/* 2. Fix the table row borders to match the subtle dark design */
+.custom-grading-table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--text-main);
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.02);
+}
+
+.custom-grading-table > :not(caption) > * > * {
+    border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+    padding: 12px 10px; /* Gives the rows a bit more breathing room like the image */
+}
+
+/* Remove the very bottom border of the table so it doesn't double up with the card padding */
+.custom-grading-table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+/* 3. Match the exact badge colors from the image */
+.grade-badge {
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    min-width: 45px;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    border: none !important;
+}
+
+/* A Grades (Green) */
+.grade-badge.text-success { 
+    color: #4ade80 !important; 
+    background-color: rgba(74, 222, 128, 0.15) !important; 
+}
+/* B Grades (Blue) */
+.grade-badge.text-primary { 
+    color: #60a5fa !important; 
+    background-color: rgba(96, 165, 250, 0.15) !important; 
+}
+/* C Grades (Yellow) */
+.grade-badge.text-warning { 
+    color: #facc15 !important; 
+    background-color: rgba(250, 204, 21, 0.15) !important; 
+}
+/* D Grades (Purple/Grey) */
+.grade-badge.text-secondary { 
+    color: #c084fc !important; 
+    background-color: rgba(192, 132, 252, 0.15) !important; 
+}
+/* E Grades (Red) */
+.grade-badge.text-danger { 
+    color: #f87171 !important; 
+    background-color: rgba(248, 113, 113, 0.15) !important; 
+}
+    </style>
+  </head>
+  <body>
+    <div class="ambient-glow">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-graduation-cap"></i> FMC GPA
+        </a>
+
+        <div class="d-flex align-items-center order-lg-3">
+          <a href="#programs" class="btn-primary-custom d-none d-sm-block ms-2"
+            >Start Now</a
+          >
+          <button
+            class="navbar-toggler ms-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#programs">Degree Programs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#academic-hub">Guidelines</a>
+            </li>
+          </ul>
+          <div class="d-lg-none mt-3">
+            <a
+              href="#programs"
+              class="btn-primary-custom w-100 d-block text-center py-3"
+              >Start Now</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero section-padding">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 ps-lg-5 text-center text-lg-start">
+            <div class="badge-pill mx-auto mx-lg-0">
+              <i class="fas fa-sparkles"></i>GPA Portal
+            </div>
+            <h1>GPA Calculator for BSc MIT, BBA & BCom Students</h1>
+            <p class="mx-auto mx-lg-0">
+              Academic tracking tool for Faculty of Management & Commerce
+              students of South Eastern University of Sri Lanka to monitor GPA
+              and degree progress accurately.
+            </p>
+
+            <div
+              class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start"
+            >
+              <a href="#programs" class="btn-primary-custom text-center"
+                >Calculate Now</a
+              >
+              <a href="#academic-hub" class="btn-outline-custom text-center"
+                >Guidelines</a
+              >
+            </div>
+          </div>
+          <div class="col-lg-6 text-center hero-img-container mt-5 mt-lg-0">
+            <img
+              src="GPA Image.png"
+              alt="Student Graduate"
+              class="img-fluid hero-img"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="programs" class="section-padding">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-title">Select Your Degree</h2>
+          <p class="text-muted fs-5">
+            Select your degree programme to begin GPA calculation.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div
+              class="glass-card"
+              onclick="window.location.href = 'mit-gpa-calculator.html'"
+            >
+              <div class="card-icon bg-mit">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <h4>B.Sc. in MIT Degree Programme</h4>
+              <p>
+                Calculate your semester GPA and cumulative GPA while checking
+                your eligibility for graduation under the Faculty's academic
+                regulations.
+              </p>
+              <span class="card-action text-mit"
+                >Start Calculation <i class="fas fa-arrow-right"></i
+              ></span>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div
+              class="glass-card"
+              onclick="window.location.href = 'bba-degree-selection.html'"
+            >
+              <div class="card-icon bg-bba">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <h4>Bachelor of Business Administration Programmes</h4>
+              <p>
+                Select your specialization area, then calculate your semester
+                and cumulative GPA to check your eligibility for graduation
+                under the Faculty's academic regulations.
+              </p>
+              <span class="card-action text-bba"
+                >Select Degree <i class="fas fa-arrow-right"></i
+              ></span>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div
+              class="glass-card"
+              onclick="window.location.href = 'bcom-gpa-calculator.html'"
+            >
+              <div class="card-icon bg-bcom">
+                <i class="fa-solid fa-graduation-cap"></i>
+              </div>
+              <h4>B.Com. Special Degree Programme</h4>
+              <p>
+                Calculate your semester GPA and cumulative GPA while checking
+                your eligibility for graduation under the Faculty's academic
+                regulations.
+              </p>
+              <span class="card-action text-bcom"
+                >Start Calculation <i class="fas fa-arrow-right"></i
+              ></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-padding" id="academic-hub">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xl-10 col-lg-11 col-md-12">
+            <div class="text-center mb-5">
+              <h2 class="section-title">Academic Standards</h2>
+              <p class="text-muted">
+                Grading criteria and GPA calculation guidelines
+              </p>
+            </div>
+
+            <div
+              class="glass-card mb-4 px-3 px-md-4 pt-4 pb-4 position-relative overflow-hidden"
+              style="
+                height: auto !important;
+                min-height: max-content;
+                display: block !important;
+                position: static !important;
+              "
+            >
+              <div
+                class="position-absolute top-0 start-0 w-100"
+                style="
+                  height: 5px;
+                  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+                "
+              ></div>
+
+              <h4 class="fw-bold mb-4 text-center w-100" style="color: #f8fafc">
+                Scheme of Grading
+              </h4>
+
+              <div class="table-responsive border-0 shadow-none mx-auto">
+                <table
+                  class="table table-hover align-middle mb-0 text-center custom-grading-table"
+                >
+                  <thead style="background-color: rgba(245, 158, 11, 0.15)">
+                    <tr
+                      class="text-uppercase small border-bottom"
+                      style="color: #fbbf24"
+                    >
+                      <th class="py-3 text-start ps-3 fw-bold">Marks Range</th>
+                      <th class="py-3 fw-bold">Grade</th>
+                      <th class="py-3 text-end pe-3 fw-bold">Grade Points</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">75 - 100</td>
+                      <td>
+                        <span
+                          class="badge bg-success bg-opacity-10 text-success grade-badge"
+                          >A+</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">4.00</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">70 - 74</td>
+                      <td>
+                        <span
+                          class="badge bg-success bg-opacity-10 text-success grade-badge"
+                          >A</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">4.00</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">65 - 69</td>
+                      <td>
+                        <span
+                          class="badge bg-success bg-opacity-10 text-success grade-badge"
+                          >A-</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">3.70</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">60 - 64</td>
+                      <td>
+                        <span
+                          class="badge bg-primary bg-opacity-10 text-primary grade-badge"
+                          >B+</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">3.30</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">55 - 59</td>
+                      <td>
+                        <span
+                          class="badge bg-primary bg-opacity-10 text-primary grade-badge"
+                          >B</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">3.00</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">50 - 54</td>
+                      <td>
+                        <span
+                          class="badge bg-primary bg-opacity-10 text-primary grade-badge"
+                          >B-</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">2.70</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">45 - 49</td>
+                      <td>
+                        <span
+                          class="badge bg-warning bg-opacity-10 text-warning grade-badge"
+                          >C+</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">2.30</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">40 - 44</td>
+                      <td>
+                        <span
+                          class="badge bg-warning bg-opacity-10 text-warning grade-badge"
+                          >C</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">2.00</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">35 - 39</td>
+                      <td>
+                        <span
+                          class="badge bg-warning bg-opacity-10 text-warning grade-badge"
+                          >C-</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">1.70</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">30 - 34</td>
+                      <td>
+                        <span
+                          class="badge bg-secondary bg-opacity-10 text-secondary grade-badge"
+                          >D+</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">1.30</td>
+                    </tr>
+                    <tr class="border-bottom border-light">
+                      <td class="text-start ps-3">25 - 29</td>
+                      <td>
+                        <span
+                          class="badge bg-secondary bg-opacity-10 text-secondary grade-badge"
+                          >D</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">1.00</td>
+                    </tr>
+                    <tr>
+                      <td class="text-start ps-3">0 - 24</td>
+                      <td>
+                        <span
+                          class="badge bg-danger bg-opacity-10 text-danger grade-badge"
+                          >E</span
+                        >
+                      </td>
+                      <td class="text-end pe-3 text-muted">0.00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div
+              class="glass-card mb-5 px-3 px-md-4 pt-4 pb-5 position-relative overflow-hidden"
+              style="
+                height: auto !important;
+                min-height: max-content;
+                display: block !important;
+                position: static !important;
+              "
+            >
+              <div
+                class="position-absolute top-0 start-0 w-100"
+                style="
+                  height: 5px;
+                  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+                "
+              ></div>
+
+              <h4 class="fw-bold mb-4 text-center w-100" style="color: #f8fafc">
+                GPA Calculation Method
+              </h4>
+
+              <div class="mx-auto" style="max-width: 800px">
+                <p
+                  class="text-center text-muted mb-4 pb-2"
+                  style="font-size: 0.95rem; line-height: 1.7"
+                >
+                  GPA is the credit-weighted arithmetic mean of all the Grade
+                  Points (GP) obtained by a student for the course units he/she
+                  offered for a particular academic year. This will be
+                  calculated to the second decimal place according to the
+                  following formula.
+                </p>
+
+                <div
+                  class="text-center py-4 px-2 px-md-4 mb-5 rounded-4 mx-auto shadow-sm"
+                  style="
+                    max-width: 480px;
+                    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(29, 78, 216, 0.15) 100%);
+                    border: 1px solid rgba(59, 130, 246, 0.25);
+                  "
+                >
+                  <p
+                    class="small fw-bold text-uppercase mb-3"
+                    style="
+                      color: #94a3b8;
+                      letter-spacing: 1px;
+                      font-size: 0.75rem;
+                    "
+                  >
+                    Official Formula
+                  </p>
+
+                  <div
+                    class="d-flex flex-wrap align-items-center justify-content-center text-primary fw-bold gap-2"
+                    style="font-size: 1.15rem"
+                  >
+                    <span
+                      class="text-nowrap"
+                      style="font-size: 1.25rem; color: #60a5fa"
+                      >GPA = &Sigma;</span
+                    >
+                    <div
+                      class="d-inline-flex flex-column align-items-center ms-1"
+                    >
+                      <span
+                        class="border-bottom border-primary border-2 px-2 pb-1 mb-1 text-nowrap"
+                        style="color: #93c5fd"
+                        >(Credit &times; Grade Point)</span
+                      >
+                      <span class="pt-1 text-nowrap" style="color: #60a5fa"
+                        >Total Credits</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="d-flex p-3 p-md-4 rounded-3 mx-auto shadow-sm"
+                  style="
+                    max-width: 650px;
+                    background-color: rgba(59, 130, 246, 0.05);
+                    border-left: 4px solid #3b82f6;
+                  "
+                >
+                  <div class="me-3 mt-1 text-primary">
+                    <i class="fas fa-info-circle fs-5"></i>
+                  </div>
+                  <div
+                    class="text-start text-muted"
+                    style="font-size: 0.9rem; line-height: 1.6"
+                  >
+                    <strong>Note on Auxiliary Courses:</strong> Subjects such as
+                    Sinhala Language or Tamil Language may not be counted toward
+                    class awarding. However, students must obtain at least a
+                    minimum pass in these courses to complete the degree.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center mb-5 mt-5 pt-3">
+              <h2 class="section-title">Degree Completion Roadmaps</h2>
+              <p class="text-muted">
+                Structured academic pathways outlining credit requirements, GPA
+                standards, and milestones for successful degree completion.
+              </p>
+            </div>
+
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div
+                  class="card h-100 border-0 shadow rounded-4 overflow-hidden position-relative mobile-roadmap-card bg-white"
+                >
+                  <div style="height: 6px; background: #7c3aed"></div>
+
+                  <div class="card-body p-4">
+                    <div
+                      class="d-flex justify-content-between align-items-start mb-4"
+                    >
+                      <div class="d-flex align-items-center gap-3">
+                        <div
+                          class="d-flex align-items-center justify-content-center rounded-3"
+                          style="
+                            width: 50px;
+                            height: 50px;
+                            background-color: rgba(124, 58, 237, 0.2);
+                            color: #c4b5fd;
+                          "
+                        >
+                          <i class="fas fa-laptop-code fs-4"></i>
+                        </div>
+                        <div>
+                          <h4 class="fw-bold m-0 text-dark">B.Sc. in MIT</h4>
+                          <span
+                            class="badge rounded-pill mt-1"
+                            style="background-color: rgba(124, 58, 237, 0.2); color: #c4b5fd;"
+                          >
+                            General Degree
+                          </span>
+                        </div>
+                      </div>
+                      <div class="text-end ms-2">
+                        <h5 class="fw-bold m-0 text-dark">3</h5>
+                        <small
+                          class="text-muted fw-bold text-uppercase"
+                          style="font-size: 0.65rem"
+                          >Years</small
+                        >
+                      </div>
+                    </div>
+
+                    <div class="row g-2 mb-4">
+                      <div class="col-4">
+                        <div
+                          class="p-1 p-sm-2 rounded-3 text-center h-100"
+                          style="background-color: rgba(255, 255, 255, 0.05)"
+                        >
+                          <small
+                            class="d-block text-secondary fw-bold"
+                            style="font-size: 0.6rem"
+                            >CREDITS</small
+                          >
+                          <span class="fw-bolder text-dark h6 h5-sm d-block m-0"
+                            >97</span
+                          >
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div
+                          class="p-1 p-sm-2 rounded-3 text-center h-100"
+                          style="background-color: rgba(34, 197, 94, 0.1)"
+                        >
+                          <small
+                            class="d-block text-success fw-bold"
+                            style="font-size: 0.6rem"
+                            >MIN GPA</small
+                          >
+                          <span class="fw-bolder text-dark h6 h5-sm d-block m-0"
+                            >2.00</span
+                          >
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div
+                          class="p-1 p-sm-2 rounded-3 text-center h-100"
+                          style="background-color: rgba(239, 68, 68, 0.1)"
+                        >
+                          <small
+                            class="d-block text-danger fw-bold"
+                            style="font-size: 0.6rem"
+                            >MAX POOR</small
+                          >
+                          <span class="fw-bolder text-dark h6 h5-sm d-block m-0"
+                            >03</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-3"
+                      >
+                        <h6
+                          class="fw-bold text-dark m-0 text-uppercase"
+                          style="font-size: 0.75rem; letter-spacing: 0.5px"
+                        >
+                          Awarding Criteria
+                        </h6>
+                        <small
+                          class="text-muted fst-italic"
+                          style="font-size: 0.75rem"
+                          >*50% Rule Applies</small
+                        >
+                      </div>
+
+                      <div class="d-flex flex-column gap-2">
+                        <div
+                          class="d-flex align-items-center justify-content-between p-2 rounded-3 border border-light shadow-sm bg-white"
+                        >
+                          <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-medal text-warning"></i>
+                            <div class="lh-1">
+                              <span
+                                class="d-block fw-bold text-dark text-start"
+                                style="font-size: 0.9rem"
+                                >First Class</span
+                              >
+                              <small
+                                class="text-muted"
+                                style="font-size: 0.7rem"
+                                >A/A+ in 50%</small
+                              >
+                            </div>
+                          </div>
+                          <span class="badge bg-dark">3.70+</span>
+                        </div>
+
+                        <div
+                          class="d-flex align-items-center justify-content-between p-2 rounded-3 border border-light shadow-sm bg-white"
+                        >
+                          <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-medal text-secondary"></i>
+                            <div class="lh-1">
+                              <span
+                                class="d-block fw-bold text-dark text-start"
+                                style="font-size: 0.9rem"
+                                >Second Upper</span
+                              >
+                              <small
+                                class="text-muted"
+                                style="font-size: 0.7rem"
+                                >B or better in 50%</small
+                              >
+                            </div>
+                          </div>
+                          <span class="badge bg-secondary">3.30+</span>
+                        </div>
+
+                        <div
+                          class="d-flex align-items-center justify-content-between p-2 rounded-3 border border-light shadow-sm bg-white"
+                        >
+                          <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-medal" style="color: #cd7f32"></i>
+                            <div class="lh-1">
+                              <span
+                                class="d-block fw-bold text-dark text-start"
+                                style="font-size: 0.9rem"
+                                >Second Lower</span
+                              >
+                              <small
+                                class="text-muted"
+                                style="font-size: 0.7rem"
+                                >B or better in 50%</small
+                              >
+                            </div>
+                          </div>
+                          <span class="badge" style="background-color: #cd7f32"
+                            >3.00+</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div
+                  class="card h-100 border-0 shadow rounded-4 overflow-hidden position-relative mobile-roadmap-card bg-white"
+                >
+                  <div style="height: 6px; background: #db2777"></div>
+
+                  <div class="card-body p-4">
+                    <div
+                      class="d-flex justify-content-between align-items-start mb-4"
+                    >
+                      <div class="d-flex align-items-center gap-3">
+                        <div
+                          class="d-flex align-items-center justify-content-center rounded-3"
+                          style="
+                            width: 50px;
+                            height: 50px;
+                            background-color: rgba(219, 39, 119, 0.2);
+                            color: #fbcfe8;
+                          "
+                        >
+                          <i class="fas fa-briefcase fs-4"></i>
+                        </div>
+                        <div>
+                          <h4 class="fw-bold m-0 text-dark">BBA & B.Com</h4>
+                          <span
+                            class="badge rounded-pill mt-1"
+                            style="background-color: rgba(219, 39, 119, 0.2); color: #fbcfe8;"
+                          >
+                            Special Degree
+                          </span>
+                        </div>
+                      </div>
+                      <div class="text-end ms-2">
+                        <h5 class="fw-bold m-0 text-dark">4</h5>
+                        <small
+                          class="text-muted fw-bold text-uppercase"
+                          style="font-size: 0.65rem"
+                          >Years</small
+                        >
+                      </div>
+                    </div>
+
+                    <div class="row g-2 mb-4">
+                      <div class="col-4">
+                        <div
+                          class="p-1 p-sm-2 rounded-3 text-center h-100"
+                          style="background-color: rgba(255, 255, 255, 0.05)"
+                        >
+                          <small
+                            class="d-block text-secondary fw-bold"
+                            style="font-size: 0.6rem"
+                            >CREDITS</small
+                          >
+                          <span class="fw-bolder text-dark h6 h5-sm d-block m-0"
+                            >124</span
+                          >
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div
+                          class="p-1 p-sm-2 rounded-3 text-center h-100"
+                          style="background-color: rgba(34, 197, 94, 0.1)"
+                        >
+                          <small
+                            class="d-block text-success fw-bold"
+                            style="font-size: 0.6rem"
+                            >MIN GPA</small
+                          >
+                          <span class="fw-bolder text-dark h6 h5-sm d-block m-0"
+                            >2.00</span
+                          >
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div
+                          class="p-1 p-sm-2 rounded-3 text-center h-100"
+                          style="background-color: rgba(239, 68, 68, 0.1)"
+                        >
+                          <small
+                            class="d-block text-danger fw-bold"
+                            style="font-size: 0.6rem"
+                            >MAX POOR</small
+                          >
+                          <span class="fw-bolder text-dark h6 h5-sm d-block m-0"
+                            >04</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div
+                        class="d-flex justify-content-between align-items-center mb-3"
+                      >
+                        <h6
+                          class="fw-bold text-dark m-0 text-uppercase"
+                          style="font-size: 0.75rem; letter-spacing: 0.5px"
+                        >
+                          Awarding Criteria
+                        </h6>
+                        <small
+                          class="text-muted fst-italic"
+                          style="font-size: 0.75rem"
+                          >*50% Rule Applies</small
+                        >
+                      </div>
+
+                      <div class="d-flex flex-column gap-2">
+                        <div
+                          class="d-flex align-items-center justify-content-between p-2 rounded-3 border border-light shadow-sm bg-white"
+                        >
+                          <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-medal text-warning"></i>
+                            <div class="lh-1">
+                              <span
+                                class="d-block fw-bold text-dark text-start"
+                                style="font-size: 0.9rem"
+                                >First Class</span
+                              >
+                              <small
+                                class="text-muted"
+                                style="font-size: 0.7rem"
+                                >A/A+ in 50%</small
+                              >
+                            </div>
+                          </div>
+                          <span class="badge bg-dark">3.70+</span>
+                        </div>
+
+                        <div
+                          class="d-flex align-items-center justify-content-between p-2 rounded-3 border border-light shadow-sm bg-white"
+                        >
+                          <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-medal text-secondary"></i>
+                            <div class="lh-1">
+                              <span
+                                class="d-block fw-bold text-dark text-start"
+                                style="font-size: 0.9rem"
+                                >Second Upper</span
+                              >
+                              <small
+                                class="text-muted"
+                                style="font-size: 0.7rem"
+                                >B or better in 50%</small
+                              >
+                            </div>
+                          </div>
+                          <span class="badge bg-secondary">3.30+</span>
+                        </div>
+
+                        <div
+                          class="d-flex align-items-center justify-content-between p-2 rounded-3 border border-light shadow-sm bg-white"
+                        >
+                          <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-medal" style="color: #cd7f32"></i>
+                            <div class="lh-1">
+                              <span
+                                class="d-block fw-bold text-dark text-start"
+                                style="font-size: 0.9rem"
+                                >Second Lower</span
+                              >
+                              <small
+                                class="text-muted"
+                                style="font-size: 0.7rem"
+                                >B or better in 50%</small
+                              >
+                            </div>
+                          </div>
+                          <span class="badge" style="background-color: #cd7f32"
+                            >3.00+</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container mb-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+          <div class="disclaimer-card glass-card">
+            <div class="disclaimer-accent"></div>
+
+            <div class="p-2 p-md-3">
+              <div class="d-flex align-items-center gap-3 mb-4">
+                <div class="disclaimer-icon-wrapper">
+                  <i class="fas fa-shield-halved"></i>
+                </div>
+                <h3
+                  class="fw-bold m-0"
+                  style="
+                    color: #f8fafc;
+                    font-size: 1.5rem;
+                    letter-spacing: -0.5px;
+                  "
+                >
+                  Important Disclaimer
+                </h3>
+              </div>
+
+              <ul class="disclaimer-list">
+                <li>
+                  <div class="list-badge">01</div>
+                  <p>
+                    This web application is an
+                    <strong class="text-dark">independent, student-developed project</strong>
+                    created for the convenience of students to calculate their
+                    GPA easily.
+                  </p>
+                </li>
+                <li>
+                  <div class="list-badge">02</div>
+                  <p>
+                    This is <strong class="text-dark">not</strong> an official website of the
+                    Faculty of Management and Commerce, Southeastern University
+                    of Sri Lanka. It is not affiliated with, endorsed by, or
+                    maintained by the university.
+                  </p>
+                </li>
+                <li>
+                  <div class="list-badge">03</div>
+                  <p>
+                    The GPA calculation structure, course credits, and academic
+                    information used are based on the
+                    <em>“Undergraduate Guide – Academic Year 2021/2022”</em>
+                    published by the Faculty.
+                  </p>
+                </li>
+                <li>
+                  <div class="list-badge">04</div>
+                  <p>
+                    Academic regulations, course structures, subject codes, and
+                    credit values may change in future academic years. This
+                    application may not reflect the most recent updates.
+                  </p>
+                </li>
+              </ul>
+
+              <div class="official-resource-box mt-4">
+                <div
+                  class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3"
+                >
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="resource-icon">
+                      <i class="fas fa-link"></i>
+                    </div>
+                    <div>
+                      <h6
+                        class="fw-bold mb-1 text-dark"
+                        style="font-size: 0.95rem"
+                      >
+                        Official University Guide
+                      </h6>
+                      <a
+                        href="https://www.seu.ac.lk/fmc/downloads.php"
+                        target="_blank"
+                        class="resource-link text-break"
+                      >
+                        seu.ac.lk/fmc/downloads.php
+                      </a>
+                    </div>
+                  </div>
+                  <a
+                    href="https://www.seu.ac.lk/fmc/index.php"
+                    target="_blank"
+                    class="btn-outline-custom text-center"
+                    style="padding: 8px 20px; font-size: 0.9rem"
+                  >
+                    Visit Site
+                  </a>
+                </div>
+
+                <hr class="my-3 border-light" />
+
+                <div
+                  class="d-flex align-items-start gap-2 text-muted"
+                  style="font-size: 0.8rem"
+                >
+                  <i
+                    class="fas fa-info-circle"
+                    style="color: var(--primary); margin-top: 3px"
+                  ></i>
+                  <div class="text-start m-0 p-0" style="flex-grow: 0">
+                    For official and updated academic information, please always
+                    refer to the university’s official website.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container text-center">
+        <div class="text-muted fw-medium">
+          <a
+            href="https://dinoddeshanjana.github.io/Portfolio/"
+            target="_blank"
+            class="footer-link"
+          >
+            &copy; 2026 FMC GPA Calculator. Developed by
+            <span class="developer-name"> Dinod Deshanjana </span>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
