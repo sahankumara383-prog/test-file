@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     />
+    
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0f172a">
+
     <title>B.Sc. MIT General Degree - FMC</title>
 
     <link
@@ -22,45 +26,37 @@
     />
 
     <style>
-      /* --- THEME: ORIGINAL PURPLE --- */
+      /* --- THEME: PREMIUM DARK SLATE (Matching Landing Page) --- */
       :root {
-        --primary: #6f2dbd;
-        --primary-dark: #4a1d80;
-        --secondary: #a663cc;
-        --accent: #d8b4fe;
-        --primary-purple: #6f2dbd;
-        --secondary-purple: #a663cc;
-        --gradient-1: linear-gradient(135deg, #6f2dbd 0%, #a663cc 100%);
-        --bg-body: #fbfbfb;
-        --bg-card: #ffffff;
-        --text-main: #171123;
-        --text-muted: #6b7280;
-        --border: rgba(111, 45, 189, 0.15);
-        --nav-bg: rgba(251, 251, 251, 0.95);
-        --shadow-custom: 0 10px 30px rgba(111, 45, 189, 0.08);
-        --input-bg: #f8f9fa;
-        --radial-bg: rgba(111, 45, 189, 0.05);
-        --success: #10b981;
-        --warning: #f59e0b;
-        --danger: #ef4444;
-        --gradient-main: linear-gradient(135deg, #6f2dbd 0%, #a663cc 100%);
+        /* Brand Identity */
+        --primary: #9d4edd;
+        --primary-dark: #7b2cbf;
+        --secondary: #c77dff;
+        --accent: #e0aaff;
+        --primary-purple: #c77dff;
+        --secondary-purple: #9d4edd;
+        
+        --gradient-main: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
+        --gradient-1: linear-gradient(135deg, #c77dff 0%, #9d4edd 100%);
+        
+        /* Dark Theme Colors */
+        --bg-body: #0f172a;
+        --bg-card: #1e293b;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --border: rgba(255, 255, 255, 0.1);
+        --nav-bg: rgba(15, 23, 42, 0.95);
+        --shadow-custom: 0 10px 40px rgba(0, 0, 0, 0.3);
+        --input-bg: rgba(255, 255, 255, 0.03);
+        --radial-bg: rgba(255, 255, 255, 0.05);
+        
+        /* Status Colors */
+        --success: #4ade80;
+        --warning: #facc15;
+        --danger: #f87171;
+        
         /* Mobile Safe Areas */
         --safe-bottom: env(safe-area-inset-bottom, 20px);
-      }
-
-      [data-theme="dark"] {
-        --bg-body: #171123;
-        --bg-card: #1e1829;
-        --text-main: #fbfbfb;
-        --text-muted: #a09db0;
-        --border: rgba(255, 255, 255, 0.1);
-        --nav-bg: rgba(23, 17, 35, 0.95);
-        --shadow-custom: 0 10px 30px rgba(0, 0, 0, 0.4);
-        --input-bg: rgba(255, 255, 255, 0.05);
-        --radial-bg: rgba(255, 255, 255, 0.05);
-        --primary-purple: #a663cc;
-        --secondary-purple: #6f2dbd;
-        --gradient-1: linear-gradient(135deg, #a663cc 0%, #6f2dbd 100%);
       }
 
       * {
@@ -79,6 +75,10 @@
         /* Padding bottom accommodates sticky bar + safe area */
         padding-bottom: calc(100px + var(--safe-bottom)); 
         overflow-x: hidden;
+      }
+
+      html {
+        color-scheme: dark;
       }
 
       h1, h2, h3, h4, h5, .navbar-brand {
@@ -113,20 +113,24 @@
         padding: 10px 24px;
         border-radius: 50px;
         font-weight: 700;
-        box-shadow: 0 5px 15px rgba(111, 45, 189, 0.3);
+        box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
         text-decoration: none;
         white-space: nowrap;
         transition: transform 0.2s, box-shadow 0.2s;
         display: inline-block;
+      }
+      .btn-primary-custom:hover {
+        color: white;
+        box-shadow: 0 8px 20px rgba(157, 78, 221, 0.4);
       }
       .btn-primary-custom:active {
         transform: scale(0.95);
       }
 
       /* --- DASHBOARD --- */
-.app-container {
+      .app-container {
         max-width: 800px;
-        margin: 20px auto 30px; /* Changed 60px to 30px */
+        margin: 20px auto 30px;
         padding: 0 20px;
       }
 
@@ -171,7 +175,7 @@
         align-items: center;
         justify-content: center;
         position: relative;
-        box-shadow: var(--shadow-custom);
+        box-shadow: inset 0 0 0 1px var(--border), var(--shadow-custom);
         transition: --degrees 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
       }
 
@@ -183,6 +187,7 @@
         background: var(--bg-body);
         border-radius: 50%;
         z-index: 1;
+        box-shadow: inset 0 5px 15px rgba(0,0,0,0.5);
       }
 
       .gpa-value {
@@ -201,56 +206,49 @@
         -webkit-text-fill-color: transparent;
       }
       .gpa-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-top: 0px; /* Changed from 5px to 0px to pull it up */
-  text-transform: uppercase;
-  letter-spacing: 1px; /* Reduced from 1.5px to make it narrower */
-  line-height: 1.2;
-}
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-top: 0px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.2;
+      }
 
       .class-badge {
         margin-top: -22px;
         z-index: 3;
-        background: var(--bg-card);
+        background: rgba(30, 41, 59, 0.9);
         border: 1px solid var(--border);
         padding: 10px 24px;
         border-radius: 50px;
         font-size: 0.9rem;
         font-weight: 600;
         color: var(--text-main);
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(10px);
         white-space: nowrap;
       }
 
-      /* --- STATUS ALERTS (PILL SHAPE FIXED) --- */
+      /* --- STATUS ALERTS --- */
       .status-alert {
         margin-top: 25px;
         padding: 12px 30px; 
         border-radius: 50px; 
-        
-        background: rgba(239, 68, 68, 0.08); 
-        border: 1px solid rgba(239, 68, 68, 0.2);
+        background: rgba(248, 113, 113, 0.1); 
+        border: 1px solid rgba(248, 113, 113, 0.2);
         color: var(--danger);
-        
         font-size: 0.9rem;
         font-weight: 600; 
-        
         display: none; 
-        
         width: fit-content; 
         max-width: 90%; 
-        
         margin-left: auto;
         margin-right: auto;
-        
         align-items: center;
         justify-content: center;
         gap: 8px;
-        
-        box-shadow: 0 5px 20px rgba(239, 68, 68, 0.15); 
+        box-shadow: 0 5px 20px rgba(248, 113, 113, 0.1); 
       }
 
       .status-alert.active {
@@ -259,10 +257,10 @@
       }
 
       .status-alert.success {
-        background: rgba(16, 185, 129, 0.1);
-        border-color: rgba(16, 185, 129, 0.2);
+        background: rgba(74, 222, 128, 0.1);
+        border-color: rgba(74, 222, 128, 0.2);
         color: var(--success);
-        box-shadow: 0 5px 20px rgba(16, 185, 129, 0.15);
+        box-shadow: 0 5px 20px rgba(74, 222, 128, 0.1);
       }
 
       /* --- ACCORDIONS --- */
@@ -289,11 +287,11 @@
         justify-content: space-between;
         align-items: center;
         user-select: none;
-        background: rgba(255, 255, 255, 0.01);
-        min-height: 60px; /* Touch target size */
+        background: rgba(255, 255, 255, 0.02);
+        min-height: 60px;
       }
       .card-header:active {
-        background: rgba(0, 0, 0, 0.03);
+        background: rgba(255, 255, 255, 0.05);
       }
 
       .sem-name {
@@ -311,7 +309,7 @@
       }
       
       .sem-status::after {
-        content: '\f078'; /* FontAwesome chevron-down */
+        content: '\f078';
         font-family: "Font Awesome 6 Free";
         font-weight: 900;
         font-size: 0.8rem;
@@ -379,20 +377,21 @@
       }
       .badge-aux {
         font-size: 0.65rem;
-        background: var(--warning);
-        color: white;
+        background: rgba(250, 204, 21, 0.15);
+        color: var(--warning);
         padding: 2px 6px;
         border-radius: 4px;
         margin-left: 5px;
         vertical-align: text-top;
+        border: 1px solid rgba(250, 204, 21, 0.3);
       }
 
       /* Custom Styled Select */
       select {
         appearance: none;
         width: 85px;
-        height: 48px; /* Larger touch target */
-        background: var(--bg-card);
+        height: 48px;
+        background: rgba(15, 23, 42, 0.5);
         border: 1px solid var(--border);
         color: var(--text-main);
         padding: 0 10px 0 15px;
@@ -401,15 +400,20 @@
         cursor: pointer;
         outline: none;
         font-size: 1rem;
-        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236f2dbd%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        /* Updated SVG Arrow to pastel purple (%23c77dff) */
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23c77dff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
         background-repeat: no-repeat;
         background-position: right 12px top 50%;
         background-size: 10px auto;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
       }
       select:focus {
         border-color: var(--primary-purple);
-        box-shadow: 0 0 0 3px rgba(111, 45, 189, 0.1);
+        box-shadow: 0 0 0 3px rgba(199, 125, 255, 0.2);
+      }
+      select option {
+        background-color: var(--bg-card);
+        color: var(--text-main);
       }
 
       /* --- STATS --- */
@@ -426,7 +430,6 @@
         text-align: center;
         border: 1px solid var(--border);
         box-shadow: var(--shadow-custom);
-        /* Prevent layout shift */
         min-width: 0; 
       }
       .stat-box small {
@@ -437,7 +440,6 @@
         letter-spacing: 0.5px;
         display: block;
         margin-bottom: 5px;
-        /* Handle text overflow for mobile */
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -455,25 +457,20 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: var(--bg-card);
+        background: rgba(15, 23, 42, 0.9);
         border-top: 1px solid var(--border);
-        /* Use Safe Area for notched phones */
         padding: 15px 20px calc(15px + var(--safe-bottom)) 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         z-index: 999;
-        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
         transform: translateY(100%);
         transition: transform 0.3s ease;
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
-        background: rgba(255, 255, 255, 0.9);
       }
-      [data-theme="dark"] .mobile-sticky-bar {
-          background: rgba(30, 24, 41, 0.9);
-      }
-
+      
       .mobile-sticky-bar.visible {
         transform: translateY(0);
       }
@@ -499,34 +496,28 @@
         font-weight: 600;
       }
 
-footer {
+      footer {
         margin-top: auto;
-        padding: 20px 0; /* Reduced from 40px */
+        padding: 20px 0;
         border-top: 1px solid var(--border);
         background: rgba(255, 255, 255, 0.02);
       }
-   .footer-link {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.94rem;
-}
+      .footer-link {
+        color: inherit;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.94rem;
+      }
 
-.developer-name {
-  color: var(--primary-purple);
-  font-weight: 700;
-}
+      .developer-name {
+        color: var(--primary-purple);
+        font-weight: 700;
+      }
 
       /* --- SMOOTH PAGE LOAD ANIMATION --- */
       @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       .navbar { animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
@@ -538,96 +529,41 @@ footer {
         .app-container {
           max-width: 100%;
           margin-top: 10px;
-          padding: 0 15px; /* Less side padding */
+          padding: 0 15px; 
         }
-        
-        .page-header h2 {
-          font-size: 1.5rem;
-        }
-
-        .radial-progress {
-          width: 170px;
-          height: 170px;
-        }
-        .radial-progress::before {
-          width: 140px;
-          height: 140px;
-        }
-        .gpa-number {
-          font-size: 2.8rem;
-        }
-
-        .stats-bar {
-          gap: 8px; /* Tighter gaps for stats */
-        }
-        .stat-box {
-          padding: 12px 4px;
-        }
-        .stat-box small {
-          font-size: 0.65rem;
-        }
-        .stat-box div {
-          font-size: 1.1rem;
-        }
-        .gpa-number {
-    font-size: 2.4rem; /* Reduced from 2.8rem so it doesn't push the label down */
-  }
-
-  .gpa-label {
-    font-size: 0.55rem; /* Make label much smaller on mobile */
-    letter-spacing: 0.5px; /* Tighten letters */
-    margin-top: 2px;
-  }
+        .page-header h2 { font-size: 1.5rem; }
+        .radial-progress { width: 170px; height: 170px; }
+        .radial-progress::before { width: 140px; height: 140px; }
+        .stats-bar { gap: 8px; }
+        .stat-box { padding: 12px 4px; }
+        .stat-box small { font-size: 0.65rem; }
+        .stat-box div { font-size: 1.1rem; }
+        .gpa-number { font-size: 2.4rem; }
+        .gpa-label { font-size: 0.55rem; letter-spacing: 0.5px; margin-top: 2px; }
       }
 
       /* --- SMALL MOBILE OPTIMIZATIONS (Phone) --- */
       @media (max-width: 576px) {
-        .navbar-brand {
-            font-size: 1.2rem;
-        }
-
-        /* Prevent iOS zoom on inputs */
-        select {
-            font-size: 16px; 
-            width: 80px;
-        }
-        
-        .mod-info { 
-            font-size: 0.9rem; 
-        }
-
-        /* Adjust sticky bar for very small screens */
+        .navbar-brand { font-size: 1.2rem; }
+        select { font-size: 16px; width: 80px; }
+        .mod-info { font-size: 0.9rem; }
         .sticky-value { font-size: 1.3rem; }
         .sticky-credits { font-size: 0.9rem; }
       }
 
       /* --- TINY SCREENS (iPhone SE 1st gen etc) --- */
       @media (max-width: 370px) {
-        .radial-progress {
-          width: 150px;
-          height: 150px;
-        }
-        .radial-progress::before {
-          width: 125px;
-          height: 125px;
-        }
+        .radial-progress { width: 150px; height: 150px; }
+        .radial-progress::before { width: 125px; height: 125px; }
         .gpa-number { font-size: 2.2rem; }
         .page-header h2 { font-size: 1.3rem; }
-        
-        /* Stack modules vertically if screen is extremely narrow */
-        .module-row {
-            gap: 10px;
-        }
+        .module-row { gap: 10px; }
         .mod-info { font-size: 0.85rem; }
       }
       
       @media (min-width: 992px) {
-        .mobile-sticky-bar {
-          display: none !important;
-        }
-        body {
-          padding-bottom: 20px; /* Removes the huge 100px gap on desktop */
-        }
+        .mobile-sticky-bar { display: none !important; }
+        body { padding-bottom: 20px; }
       }
     </style>
   </head>
@@ -635,13 +571,11 @@ footer {
     <nav class="navbar navbar-expand-lg sticky-top">
       <div class="container">
         <a class="navbar-brand" href="index.html">
-                <i class="fas fa-graduation-cap"></i> FMC GPA
+          <i class="fas fa-graduation-cap"></i> FMC GPA
         </a>
 
         <div class="d-flex align-items-center order-lg-3">
-          <a href="index.html" class="btn-primary-custom d-none d-sm-block ms-2"
-            >Back to Home</a
-          >
+          <a href="index.html" class="btn-primary-custom d-none d-sm-block ms-2">Back to Home</a>
           <button
             class="navbar-toggler ms-2"
             type="button"
@@ -649,20 +583,13 @@ footer {
             data-bs-target="#navbarNav"
             style="border: none; outline: none; padding: 5px;"
           >
-            <span
-              class="navbar-toggler-icon"
-              style="filter: invert(0.5); width: 1.2em; height: 1.2em;"
-            ></span>
+            <span class="navbar-toggler-icon" style="filter: invert(1); width: 1.2em; height: 1.2em;"></span>
           </button>
         </div>
 
         <div class="collapse navbar-collapse" id="navbarNav">
           <div class="d-lg-none mt-3 pb-2">
-            <a
-              href="index.html"
-              class="btn-primary-custom w-100 d-block text-center"
-              >Back to Home</a
-            >
+            <a href="index.html" class="btn-primary-custom w-100 d-block text-center">Back to Home</a>
           </div>
         </div>
       </div>
@@ -706,12 +633,13 @@ footer {
       </div>
 
       <div class="semester-list" id="semContainer"></div>
-<div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-custom); margin-top: 35px; padding: 25px;">
+      
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-custom); margin-top: 35px; padding: 25px;">
         <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; text-align: justify;">
           <strong>Disclaimer:</strong> This is an independent student-developed project and is not affiliated with, endorsed by, or maintained by the Faculty of Management and Commerce, South Eastern University of Sri Lanka. GPA calculations are based on the  <b>Undergraduate Guide – Academic Year 2021/2022</b>. Academic structures, subjects, and credit values may change in future years.
         </p>
         <div class="text-center">
-          <a href="https://www.seu.ac.lk/fmc/downloads.php" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; border: 1px solid var(--border); color: var(--primary-purple); font-weight: 600; text-decoration: none; font-size: 0.9rem; background: var(--bg-card); transition: all 0.2s;">
+          <a href="https://www.seu.ac.lk/fmc/downloads.php" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; border: 1px solid var(--border); color: var(--primary-purple); font-weight: 600; text-decoration: none; font-size: 0.9rem; background: var(--input-bg); transition: all 0.2s;">
             <i class="fas fa-download me-2"></i> Download Official Guide
           </a>
         </div>
@@ -729,46 +657,28 @@ footer {
       </div>
     </div>
 
-<footer>
-  <div class="container text-center">
-    <div class="text-muted fw-medium">
-      <a href="https://dinoddeshanjana.github.io/Portfolio/" target="_blank" class="footer-link">
-        &copy; 2026 FMC GPA Calculator. Developed by 
-        <span class="developer-name">
-          Dinod Deshanjana
-        </span>
-      </a>
-    </div>
-  </div>
-</footer>
+    <footer>
+      <div class="container text-center">
+        <div class="text-muted fw-medium">
+          <a href="https://dinoddeshanjana.github.io/Portfolio/" target="_blank" class="footer-link">
+            &copy; 2026 FMC GPA Calculator. Developed by 
+            <span class="developer-name">
+              Dinod Deshanjana
+            </span>
+          </a>
+        </div>
+      </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      // --- 1. THEME TOGGLE ---
-      function toggleTheme() {
-        const html = document.documentElement;
-        const icon = document.getElementById("themeIcon");
-        const navbarToggler = document.querySelector(".navbar-toggler-icon");
-        const isDark = html.getAttribute("data-theme") === "dark";
-        const newTheme = isDark ? "light" : "dark";
-        html.setAttribute("data-theme", newTheme);
-        localStorage.setItem("fmc-theme", newTheme);
-        if (navbarToggler)
-          navbarToggler.style.filter = isDark ? "invert(0.5)" : "invert(1)";
-      }
-
+      // --- 1. THEME TOGGLE (Removed) ---
+      // Replaced by forcing dark mode via HTML tag and strict CSS variables
       window.onload = () => {
-        if (localStorage.getItem("fmc-theme") === "dark") {
-          document.documentElement.setAttribute("data-theme", "dark");
-          const navbarToggler = document.querySelector(".navbar-toggler-icon");
-          if (navbarToggler) navbarToggler.style.filter = "invert(1)";
-        }
-
         window.addEventListener("scroll", () => {
           const hub = document.querySelector(".gpa-hub");
           const stickyBar = document.getElementById("mobileStickyBar");
-          // Check if elements exist before reading properties to prevent errors
           if(hub && stickyBar) {
             const hubBottom = hub.offsetTop + hub.offsetHeight;
             if (window.scrollY > hubBottom) {
@@ -782,18 +692,10 @@ footer {
 
       // --- 2. DATA & CONFIGURATION ---
       const gradeScale = {
-        "A+": 4.0,
-        A: 4.0,
-        "A-": 3.7,
-        "B+": 3.3,
-        B: 3.0,
-        "B-": 2.7,
-        "C+": 2.3,
-        C: 2.0,
-        "C-": 1.7,
-        "D+": 1.3,
-        D: 1.0,
-        E: 0.0,
+        "A+": 4.0, A: 4.0, "A-": 3.7,
+        "B+": 3.3, B: 3.0, "B-": 2.7,
+        "C+": 2.3, C: 2.0, "C-": 1.7,
+        "D+": 1.3, D: 1.0, E: 0.0,
       };
 
       const degreeCredits = 97;
@@ -904,12 +806,12 @@ footer {
         document.getElementById(`card-${id}`).classList.toggle("active");
       }
 
-      // --- 4. CALCULATION ENGINE ---
+      // --- 4. CALCULATION ENGINE (100% UNTOUCHED) ---
       document.querySelectorAll("select").forEach((input) => {
         input.addEventListener("change", calculateDegree);
       });
 
-function calculateDegree() {
+      function calculateDegree() {
         let totalPoints = 0;
         let totalGPACredits = 0;
         let totalEarnedCredits = 0;
@@ -919,16 +821,14 @@ function calculateDegree() {
         let semesterPoorViolation = false;
 
         let auxFailCount = 0; 
-        let auxPassCount = 0; // NEW: Tracks passed Aux courses
-        const totalRequiredAux = 2; // NEW: Total required Aux courses for the degree
+        let auxPassCount = 0; 
+        const totalRequiredAux = 2; 
 
-        // Class calculation counters
         let totalCoursesTaken = 0;
-        let countA = 0; // A+, A
-        let countBOrBetter = 0; // B or better
-        let countBelowC = 0; // C-, D+, D, E
+        let countA = 0; 
+        let countBOrBetter = 0; 
+        let countBelowC = 0; 
 
-        // ================= LOOP SEMESTERS =================
         document.querySelectorAll(".glass-card").forEach((card, idx) => {
           const inputs = card.querySelectorAll("select");
           let semPoints = 0;
@@ -942,18 +842,15 @@ function calculateDegree() {
             const credit = parseFloat(inp.getAttribute("data-credit"));
             const isAux = inp.getAttribute("data-aux") === "true";
 
-            // --- AUXILIARY LOGIC ---
             if (isAux) {
-              // Strict Completion Rule: Grade MUST be C or higher.
               if (gradeScale[grade] >= 2.0) {
-                auxPassCount++; // NEW: Increment pass count
+                auxPassCount++; 
               } else {
                 auxFailCount++;
               }
-              return; // Do NOT add to GPA or Poor Grade Counts
+              return; 
             }
 
-            // --- CORE SUBJECT LOGIC ---
             totalCoursesTaken++;
             const gp = gradeScale[grade];
 
@@ -969,19 +866,16 @@ function calculateDegree() {
               failCount++;
             }
 
-            // Poor Grades (C-, D+, D) - Only for Core
             if (["C-", "D+", "D"].includes(grade)) {
               poorGradesCount++;
               semPoorGrades++;
             }
 
-            // Class Eligibility Counters
             if (["A+", "A"].includes(grade)) countA++;
             if (gradeScale[grade] >= 3.0) countBOrBetter++;
             if (["C-", "D+", "D", "E"].includes(grade)) countBelowC++;
           });
 
-          // Semester GPA Display
           const semGpaDisplay = document.getElementById(`sem-gpa-${idx}`);
           if (semCredits > 0) {
             semGpaDisplay.innerText = (semPoints / semCredits).toFixed(2);
@@ -994,27 +888,23 @@ function calculateDegree() {
           }
         });
 
-        // ================= FINAL CGPA =================
         const cgpa = totalGPACredits > 0 ? totalPoints / totalGPACredits : 0;
         const cgpaFixed = cgpa.toFixed(2);
 
-        // ================= UI UPDATE =================
         const totalCreditsText = `${totalEarnedCredits} / ${degreeCredits}`;
 
         document.getElementById("mainGPA").innerText = cgpaFixed;
         document.getElementById("totalCredits").innerText = totalCreditsText;
         document.getElementById("failCount").innerText = failCount;
         
-        // UPDATED: Poor Grades UI Polish
         const poorCountEl = document.getElementById("poorCount");
         poorCountEl.innerText = `${poorGradesCount} / 3`;
         if (poorGradesCount > 3) {
-            poorCountEl.style.color = "var(--danger)";
+          poorCountEl.style.color = "var(--danger)";
         } else {
-            poorCountEl.style.color = "inherit"; // Reset color if fixed
+          poorCountEl.style.color = "inherit";
         }
 
-        // Sticky Bar Update
         document.getElementById("stickyGPA").innerText = cgpaFixed;
         document.getElementById("stickyCredits").innerText = totalCreditsText;
 
@@ -1023,7 +913,6 @@ function calculateDegree() {
           .getElementById("radialDial")
           .style.setProperty("--degrees", `${degrees}deg`);
 
-        // ================= ELIGIBILITY =================
         const statusAlert = document.getElementById("degreeStatusAlert");
         const statusText = document.getElementById("statusText");
         const classBadge = document.getElementById("classBadge");
@@ -1037,10 +926,8 @@ function calculateDegree() {
         if (poorGradesCount > 3) issues.push("Max 3 Poor Grades allowed");
         if (semesterPoorViolation) issues.push("Max 1 Poor Grade per Sem");
         if (auxFailCount > 0) issues.push("Must repeat failed Aux courses (Min C)"); 
-        // NEW: Enforce that all Aux courses must be passed
         if (auxPassCount < totalRequiredAux) issues.push(`Must complete ${totalRequiredAux} Aux courses (Min C)`); 
 
-        // UPDATED: Fixed initial state check to include auxPassCount
         if (totalGPACredits === 0 && auxFailCount === 0 && auxPassCount === 0) {
           statusAlert.classList.remove("active");
           classBadge.innerHTML =
@@ -1055,7 +942,6 @@ function calculateDegree() {
           let badgeIcon = "fa-check-circle";
           let badgeColor = "var(--success)";
 
-          // Check Classes - Section 6.5
           if (countBelowC === 0) {
             if (cgpa >= 3.7 && countA >= halfCourses) {
               finalClass = "First Class";
