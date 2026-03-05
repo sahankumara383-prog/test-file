@@ -660,22 +660,45 @@
    ========================================= */
 
 /* 1. Strip the gradient and force a solid, bright color */
+/* =========================================
+   DEGREE CARD ICONS (SOLID COLORS)
+   ========================================= */
+
 .bg-mit {
-    background-color: #8B5CF6 !important;
-    background-image: none !important; /* This stops Samsung from breaking the gradient */
+    background: #A078FF !important; /* Solid Light Purple */
+    background-color: #A078FF !important; 
+    background-image: none !important; /* Stops Samsung from forcing dark mode */
     color: #ffffff !important;
 }
 
 .bg-bba {
-    background-color: #EC4899 !important;
+    background: #F44E93 !important; /* Solid Vibrant Pink */
+    background-color: #F44E93 !important;
     background-image: none !important;
     color: #ffffff !important;
 }
 
 .bg-bcom {
-    background-color: #F59E0B !important;
+    background: #FFA114 !important; /* Solid Golden Orange */
+    background-color: #FFA114 !important;
     background-image: none !important;
     color: #ffffff !important;
+}
+
+/* Ensure the icon box has the right shape and shadow */
+.card-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin: 0 auto 24px auto;
+    /* Keeps the nice drop shadow to make them pop */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    transition: transform 0.4s ease;
 }
 
 /* 2. Add a subtle glass border and deeper shadow to make them pop */
@@ -1621,5 +1644,6 @@
   </body>
 
 </html>
+
 
 
