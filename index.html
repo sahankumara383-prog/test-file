@@ -719,6 +719,71 @@
 .card-icon {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}/* =========================================
+   HERO SECTION - MOBILE RESPONSIVENESS & POLISH
+   ========================================= */
+
+/* --- 1. Desktop Refinements --- */
+.hero h1 {
+    line-height: 1.3; /* Gives the big heading letters more room to breathe */
+}
+
+.hero p {
+    color: #cbd5e1 !important; /* Brighter silver text for better contrast against deep purple */
+}
+
+.nav-link.active {
+    color: #ffffff !important; /* Makes the active "Home" link stand out clearly */
+}
+
+/* --- 2. Mobile & Tablet Adjustments (Max 768px) --- */
+@media (max-width: 768px) {
+    .hero {
+        text-align: center; /* Centers all text on small screens */
+        padding-top: 40px;
+        padding-bottom: 20px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem !important; /* Scales down the massive text to fit phone screens */
+        line-height: 1.25;
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        margin: 0 auto 30px auto;
+        max-width: 90%; /* Keeps text from touching the very edges of the screen */
+    }
+
+    /* Stacks the buttons vertically for easy thumb-tapping */
+    .hero .d-flex {
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    /* Makes buttons full-width on mobile */
+    .hero .btn-primary-custom, 
+    .hero .btn-outline-custom {
+        width: 100%; 
+        margin: 0;
+        padding: 14px 20px; /* Slightly taller for touch targets */
+    }
+
+    /* Scales the 3D students perfectly under the buttons */
+    .hero-img {
+        max-width: 280px; 
+        margin-top: 40px;
+    }
+}
+
+/* --- 3. Extra Small Phones (Max 400px) --- */
+@media (max-width: 400px) {
+    .hero h1 {
+        font-size: 1.9rem !important; /* Extra shrink for very narrow phones */
+    }
 }
     </style>
   </head>
@@ -1658,6 +1723,7 @@
   </body>
 
 </html>
+
 
 
 
