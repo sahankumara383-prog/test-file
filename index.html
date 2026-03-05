@@ -664,27 +664,36 @@
    DEGREE CARD ICONS (SOLID COLORS)
    ========================================= */
 
+/* =========================================
+   DEGREE CARD ICONS (SAMSUNG BROWSER HACK)
+   ========================================= */
+
 .bg-mit {
-    background: #A078FF !important; /* Solid Light Purple */
-    background-color: #A078FF !important; 
-    background-image: none !important; /* Stops Samsung from forcing dark mode */
+    background-color: transparent !important; 
+    background-image: none !important;
+    /* The Hack: Paint the color using an inner shadow */
+    box-shadow: inset 0 0 0 100px #A078FF, 0 10px 25px rgba(0, 0, 0, 0.4) !important;
     color: #ffffff !important;
+    border: none !important;
 }
 
 .bg-bba {
-    background: #F44E93 !important; /* Solid Vibrant Pink */
-    background-color: #F44E93 !important;
+    background-color: transparent !important;
     background-image: none !important;
+    /* The Hack: Paint the color using an inner shadow */
+    box-shadow: inset 0 0 0 100px #F44E93, 0 10px 25px rgba(0, 0, 0, 0.4) !important;
     color: #ffffff !important;
+    border: none !important;
 }
 
 .bg-bcom {
-    background: #FFA114 !important; /* Solid Golden Orange */
-    background-color: #FFA114 !important;
+    background-color: transparent !important;
     background-image: none !important;
+    /* The Hack: Paint the color using an inner shadow */
+    box-shadow: inset 0 0 0 100px #FFA114, 0 10px 25px rgba(0, 0, 0, 0.4) !important;
     color: #ffffff !important;
+    border: none !important;
 }
-
 /* Ensure the icon box has the right shape and shadow */
 .card-icon {
     width: 68px;
@@ -1644,6 +1653,7 @@
   </body>
 
 </html>
+
 
 
 
