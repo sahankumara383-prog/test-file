@@ -655,6 +655,33 @@
         /* Optional: Add a subtle text shadow so it pops even if the browser messes with the background */
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
+}/* =========================================
+   FIX FOR CARD ICONS (SAMSUNG BROWSER OVERRIDE)
+   ========================================= */
+
+/* 1. Strip the gradient and force a solid, bright color */
+.bg-mit {
+    background-color: #8B5CF6 !important;
+    background-image: none !important; /* This stops Samsung from breaking the gradient */
+    color: #ffffff !important;
+}
+
+.bg-bba {
+    background-color: #EC4899 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+.bg-bcom {
+    background-color: #F59E0B !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+/* 2. Add a subtle glass border and deeper shadow to make them pop */
+.card-icon {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
     </style>
   </head>
@@ -1594,4 +1621,5 @@
   </body>
 
 </html>
+
 
