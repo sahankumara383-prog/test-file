@@ -668,47 +668,52 @@
    DEGREE CARD ICONS (SAMSUNG BROWSER HACK)
    ========================================= */
 
-.bg-mit {
-    background-color: transparent !important; 
-    background-image: none !important;
-    /* The Hack: Paint the color using an inner shadow */
-    box-shadow: inset 0 0 0 100px #A078FF, 0 10px 25px rgba(0, 0, 0, 0.4) !important;
-    color: #ffffff !important;
+/* =========================================
+   DEGREE CARD ICONS (BULLETPROOF MOBILE FIX)
+   ========================================= */
+
+/* 1. Make the main icon container transparent and prepare it for the fake background */
+.card-icon {
+    position: relative;
+    z-index: 1;
+    background: transparent !important; 
     border: none !important;
+    box-shadow: none !important; /* Move shadow to the pseudo-element */
 }
 
-.bg-bba {
-    background-color: transparent !important;
-    background-image: none !important;
-    /* The Hack: Paint the color using an inner shadow */
-    box-shadow: inset 0 0 0 100px #F44E93, 0 10px 25px rgba(0, 0, 0, 0.4) !important;
-    color: #ffffff !important;
-    border: none !important;
+/* 2. Create the "fake" background layer that mobile browsers ignore */
+.card-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    z-index: -1;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Adds the drop shadow back */
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.bg-bcom {
-    background-color: transparent !important;
-    background-image: none !important;
-    /* The Hack: Paint the color using an inner shadow */
-    box-shadow: inset 0 0 0 100px #FFA114, 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+/* 3. Apply your vibrant colors to the fake backgrounds */
+.bg-mit::before {
+    background-color: #A078FF !important; /* Solid Light Purple */
+}
+
+.bg-bba::before {
+    background-color: #F44E93 !important; /* Solid Vibrant Pink */
+}
+
+.bg-bcom::before {
+    background-color: #FFA114 !important; /* Solid Golden Orange */
+}
+
+/* Ensure the graduation cap icon stays pure white */
+.card-icon i {
     color: #ffffff !important;
-    border: none !important;
 }
 /* Ensure the icon box has the right shape and shadow */
-.card-icon {
-    width: 68px;
-    height: 68px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.75rem;
-    margin: 0 auto 24px auto;
-    /* Keeps the nice drop shadow to make them pop */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    transition: transform 0.4s ease;
-}
+
 
 /* 2. Add a subtle glass border and deeper shadow to make them pop */
 .card-icon {
@@ -1653,6 +1658,7 @@
   </body>
 
 </html>
+
 
 
 
