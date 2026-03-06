@@ -8,7 +8,7 @@
     />
     
     <meta name="color-scheme" content="dark">
-    <meta name="theme-color" content="#0f172a">
+    <meta name="theme-color" content="#0d111a">
 
     <title>B.Sc. MIT General Degree - FMC</title>
 
@@ -26,29 +26,25 @@
     />
 
     <style>
-      /* --- THEME: PREMIUM DARK SLATE (Matching Landing Page) --- */
+      /* =========================================
+         THEME: PREMIUM NAVY & NEON (MATCHING MOCKUP)
+         ========================================= */
       :root {
-        /* Brand Identity */
-        --primary: #9d4edd;
-        --primary-dark: #7b2cbf;
-        --secondary: #c77dff;
-        --accent: #e0aaff;
-        --primary-purple: #c77dff;
-        --secondary-purple: #9d4edd;
+        /* Core Colors */
+        --bg-body: #0d111a;         
+        --bg-card: #161c2d;         
+        --bg-input: #0a0d14;        
+        --border: #222b40;          
         
-        --gradient-main: linear-gradient(135deg, #9d4edd 0%, #c77dff 100%);
-        --gradient-1: linear-gradient(135deg, #c77dff 0%, #9d4edd 100%);
-        
-        /* Dark Theme Colors */
-        --bg-body: #0f172a;
-        --bg-card: #1e293b;
+        /* Typography */
         --text-main: #f8fafc;
-        --text-muted: #94a3b8;
-        --border: rgba(255, 255, 255, 0.1);
-        --nav-bg: rgba(15, 23, 42, 0.95);
-        --shadow-custom: 0 10px 40px rgba(0, 0, 0, 0.3);
-        --input-bg: rgba(255, 255, 255, 0.03);
-        --radial-bg: rgba(255, 255, 255, 0.05);
+        --text-muted: #8b95a5;
+        
+        /* Accents */
+        --primary: #c57bff;         
+        --primary-dark: #9d4edd;    
+        --gradient-main: linear-gradient(135deg, #c57bff 0%, #ff8fb3 100%);
+        --gradient-text: linear-gradient(90deg, #c57bff 0%, #ff8fb3 100%);
         
         /* Status Colors */
         --success: #4ade80;
@@ -63,7 +59,6 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         -webkit-tap-highlight-color: transparent;
       }
 
@@ -72,14 +67,11 @@
         background-color: var(--bg-body);
         color: var(--text-main);
         min-height: 100vh;
-        /* Padding bottom accommodates sticky bar + safe area */
         padding-bottom: calc(100px + var(--safe-bottom)); 
         overflow-x: hidden;
       }
 
-      html {
-        color-scheme: dark;
-      }
+      html { color-scheme: dark; }
 
       h1, h2, h3, h4, h5, .navbar-brand {
         font-family: "Poppins", sans-serif;
@@ -87,107 +79,100 @@
 
       /* --- NAVBAR --- */
       .navbar {
-        background: var(--nav-bg);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid var(--border);
-        padding: 0.8rem 0;
+        background: transparent;
+        padding: 1.5rem 0;
         z-index: 1000;
-        transition: top 0.3s;
       }
 
       .navbar-brand {
         font-weight: 800;
         font-size: 1.3rem;
-        background: var(--gradient-main);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: var(--primary) !important;
         letter-spacing: -0.5px;
+        margin: 0; /* Prevents misalignment */
       }
 
       .btn-primary-custom {
         background: var(--gradient-main);
-        color: white;
+        color: #fff !important;
         border: none;
-        padding: 10px 24px;
+        padding: 10px 20px;
         border-radius: 50px;
-        font-weight: 700;
-        box-shadow: 0 5px 15px rgba(157, 78, 221, 0.3);
+        font-weight: 600;
+        font-size: 0.9rem;
         text-decoration: none;
-        white-space: nowrap;
-        transition: transform 0.2s, box-shadow 0.2s;
-        display: inline-block;
+        transition: opacity 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
       }
-      .btn-primary-custom:hover {
-        color: white;
-        box-shadow: 0 8px 20px rgba(157, 78, 221, 0.4);
-      }
-      .btn-primary-custom:active {
-        transform: scale(0.95);
-      }
+      .btn-primary-custom:hover { opacity: 0.9; }
 
-      /* --- DASHBOARD --- */
+      /* --- DASHBOARD CONTAINER --- */
       .app-container {
-        max-width: 800px;
-        margin: 20px auto 30px;
+        max-width: 750px; 
+        margin: 0 auto 40px;
         padding: 0 20px;
       }
 
+      /* --- PAGE HEADER --- */
       .page-header {
         text-align: center;
-        margin-bottom: 30px;
-        margin-top: 10px;
+        margin-bottom: 40px;
       }
       .page-header h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: 700;
-        line-height: 1.2;
-        background: linear-gradient(135deg, var(--text-main) 30%, var(--primary) 100%);
+        line-height: 1.3;
+        color: #ffffff;
+        margin-bottom: 10px;
+      }
+      
+      .gradient-title {
+        background: var(--gradient-text);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 8px;
       }
+      
       .page-header p {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: var(--text-muted);
       }
 
-      /* --- RADIAL GPA --- */
+      /* --- RADIAL GPA HUB --- */
       .gpa-hub {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 35px;
+        margin-bottom: 40px;
         position: relative;
       }
 
       .radial-progress {
-        width: 210px;
-        height: 210px;
+        width: 180px;
+        height: 180px;
         border-radius: 50%;
         background: conic-gradient(
-          var(--primary-purple) var(--degrees, 0deg),
-          var(--radial-bg) 0deg
+          var(--primary) var(--degrees, 0deg),
+          var(--bg-card) 0deg
         );
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
-        box-shadow: inset 0 0 0 1px var(--border), var(--shadow-custom);
+        box-shadow: 0 0 30px rgba(197, 123, 255, 0.1);
         transition: --degrees 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
       }
 
       .radial-progress::before {
         content: "";
         position: absolute;
-        width: 175px;
-        height: 175px;
+        width: 155px;
+        height: 155px;
         background: var(--bg-body);
         border-radius: 50%;
         z-index: 1;
-        box-shadow: inset 0 5px 15px rgba(0,0,0,0.5);
       }
 
       .gpa-value {
@@ -196,138 +181,140 @@
         text-align: center;
       }
       .gpa-number {
-        font-size: 3.5rem;
+        font-size: 3rem;
         font-weight: 800;
         line-height: 1;
         font-family: "Poppins", sans-serif;
-        background: var(--gradient-1);
+        background: var(--gradient-text);
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
       .gpa-label {
-        font-size: 0.75rem;
+        font-size: 0.65rem;
         font-weight: 600;
         color: var(--text-muted);
-        margin-top: 0px;
         text-transform: uppercase;
         letter-spacing: 1px;
-        line-height: 1.2;
+        margin-top: 5px;
       }
 
       .class-badge {
-        margin-top: -22px;
+        margin-top: -15px;
         z-index: 3;
-        background: rgba(30, 41, 59, 0.9);
+        background: var(--bg-card);
         border: 1px solid var(--border);
-        padding: 10px 24px;
+        padding: 8px 20px;
         border-radius: 50px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         font-weight: 600;
         color: var(--text-main);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(10px);
-        white-space: nowrap;
       }
 
-      /* --- STATUS ALERTS --- */
-      .status-alert {
-        margin-top: 25px;
-        padding: 12px 30px; 
-        border-radius: 50px; 
-        background: rgba(248, 113, 113, 0.1); 
-        border: 1px solid rgba(248, 113, 113, 0.2);
-        color: var(--danger);
-        font-size: 0.9rem;
-        font-weight: 600; 
-        display: none; 
-        width: fit-content; 
-        max-width: 90%; 
-        margin-left: auto;
-        margin-right: auto;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        box-shadow: 0 5px 20px rgba(248, 113, 113, 0.1); 
+      /* --- STATS BAR --- */
+      .stats-bar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+      .stat-box {
+        background: var(--bg-card);
+        border-radius: 12px;
+        padding: 20px 10px;
+        text-align: center;
+        border: 1px solid var(--border);
+      }
+      .stat-box small {
+        color: var(--text-muted);
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        display: block;
+        margin-bottom: 8px;
+      }
+      .stat-box div {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-main);
+        line-height: 1;
       }
 
-      .status-alert.active {
-        display: inline-flex; 
-        animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-      }
-
-      .status-alert.success {
-        background: rgba(74, 222, 128, 0.1);
-        border-color: rgba(74, 222, 128, 0.2);
-        color: var(--success);
-        box-shadow: 0 5px 20px rgba(74, 222, 128, 0.1);
-      }
-
-      /* --- ACCORDIONS --- */
+/* --- SEMESTER LIST (ACCORDIONS) --- */
       .semester-list {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        margin-top: 20px;
+        gap: 12px;
       }
 
+      /* 1. Apply the main styling to the wrapper so corners never break */
       .glass-card {
         background: var(--bg-card);
         border: 1px solid var(--border);
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: var(--shadow-custom);
-        transition: transform 0.2s;
+        border-radius: 12px;
+        overflow: hidden; /* Forces everything inside to follow the rounded corners */
       }
 
+      /* 2. Remove borders from the header so it doesn't double up */
       .card-header {
-        padding: 20px; 
+        background: transparent !important;
+        border: none !important; 
+        border-radius: 0 !important; 
+        padding: 20px 24px; 
         cursor: pointer;
         display: flex;
         justify-content: space-between;
         align-items: center;
         user-select: none;
-        background: rgba(255, 255, 255, 0.02);
-        min-height: 60px;
+        transition: background 0.2s;
       }
-      .card-header:active {
-        background: rgba(255, 255, 255, 0.05);
+      .card-header:hover {
+        background: rgba(255, 255, 255, 0.02) !important;
+      }
+
+      /* Adds a subtle divider line only when the card is opened */
+      .glass-card.active .card-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
       }
 
       .sem-name {
-        font-weight: 700;
-        font-size: 1rem;
+        font-weight: 600;
+        font-size: 0.95rem;
         color: var(--text-main);
       }
+      
+      .glass-card.active .sem-name {
+        color: var(--primary); 
+      }
+
       .sem-status {
         display: flex;
         align-items: center;
         gap: 12px;
         font-weight: 600;
         color: var(--text-muted);
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
       
       .sem-status::after {
         content: '\f078';
         font-family: "Font Awesome 6 Free";
         font-weight: 900;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         transition: transform 0.3s ease;
       }
       .glass-card.active .sem-status::after {
         transform: rotate(180deg);
       }
 
-      .glass-card.active .sem-name {
-        color: var(--primary-purple);
-      }
-
+      /* 3. Remove borders from the hidden body so the 'extra line' disappears */
       .card-body {
         display: grid;
         grid-template-rows: 0fr;
-        transition: grid-template-rows 0.4s ease-out;
-        background: var(--input-bg);
+        transition: grid-template-rows 0.3s ease-out;
+        background: transparent !important;
+        border: none !important; 
       }
       .glass-card.active .card-body {
         grid-template-rows: 1fr;
@@ -337,23 +324,21 @@
         overflow: hidden;
         min-height: 0;
         opacity: 0;
-        visibility: hidden;
-        padding: 0 20px;
-        transition: padding 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        padding: 0 24px;
+        transition: padding 0.3s ease, opacity 0.3s ease;
       }
       .glass-card.active .card-content {
         opacity: 1;
-        visibility: visible;
-        padding: 10px 20px 20px;
+        padding: 0 24px 20px;
       }
 
-      /* --- MODULES (Responsive) --- */
+      /* --- MODULE ROWS --- */
       .module-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 16px 0;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         gap: 15px;
       }
       .module-row:last-child {
@@ -361,94 +346,117 @@
       }
 
       .mod-info {
-        font-weight: 500;
-        font-size: 0.95rem;
+        font-weight: 600;
+        font-size: 0.85rem;
         color: var(--text-main);
         flex: 1; 
         line-height: 1.4;
-        min-width: 0; 
-        padding-right: 10px;
       }
       .mod-credits {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+        font-weight: 400;
         color: var(--text-muted);
         margin-top: 4px;
         display: block;
       }
+      
       .badge-aux {
-        font-size: 0.65rem;
-        background: rgba(250, 204, 21, 0.15);
+        font-size: 0.6rem;
+        background: rgba(250, 204, 21, 0.1);
         color: var(--warning);
         padding: 2px 6px;
         border-radius: 4px;
-        margin-left: 5px;
-        vertical-align: text-top;
-        border: 1px solid rgba(250, 204, 21, 0.3);
+        margin-left: 8px;
+        border: 1px solid rgba(250, 204, 21, 0.2);
+        vertical-align: middle;
       }
 
-      /* Custom Styled Select */
+      /* Custom Select */
       select {
         appearance: none;
-        width: 85px;
-        height: 48px;
-        background: rgba(15, 23, 42, 0.5);
+        width: 75px;
+        height: 40px;
+        background: var(--bg-input);
         border: 1px solid var(--border);
         color: var(--text-main);
         padding: 0 10px 0 15px;
-        border-radius: 12px;
+        border-radius: 8px;
         font-weight: 600;
         cursor: pointer;
         outline: none;
-        font-size: 1rem;
-        /* Updated SVG Arrow to pastel purple (%23c77dff) */
-        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23c77dff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+        font-size: 0.9rem;
+        background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23c57bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
         background-repeat: no-repeat;
-        background-position: right 12px top 50%;
+        background-position: right 10px top 50%;
         background-size: 10px auto;
-        box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
       }
       select:focus {
-        border-color: var(--primary-purple);
-        box-shadow: 0 0 0 3px rgba(199, 125, 255, 0.2);
+        border-color: var(--primary);
       }
       select option {
         background-color: var(--bg-card);
         color: var(--text-main);
       }
 
-      /* --- STATS --- */
-      .stats-bar {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        margin-top: 35px;
+      /* --- STATUS ALERTS --- */
+      .status-alert {
+        margin-top: 25px;
+        padding: 10px 24px; 
+        border-radius: 50px; 
+        background: rgba(248, 113, 113, 0.1); 
+        border: 1px solid rgba(248, 113, 113, 0.2);
+        color: var(--danger);
+        font-size: 0.85rem;
+        font-weight: 600; 
+        display: none; 
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
       }
-      .stat-box {
-        background: var(--bg-card);
-        border-radius: 16px;
-        padding: 15px 5px;
-        text-align: center;
+
+      .status-alert.active {
+        display: inline-flex; 
+      }
+
+      .status-alert.success {
+        background: rgba(74, 222, 128, 0.1);
+        border-color: rgba(74, 222, 128, 0.2);
+        color: var(--success);
+      }
+
+      /* --- DISCLAIMER BOX --- */
+      .disclaimer-box {
+        background: transparent;
         border: 1px solid var(--border);
-        box-shadow: var(--shadow-custom);
-        min-width: 0; 
+        border-radius: 12px;
+        margin-top: 40px;
+        padding: 24px;
+        text-align: center;
       }
-      .stat-box small {
+      .disclaimer-box p {
+        font-size: 0.8rem;
         color: var(--text-muted);
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        display: block;
-        margin-bottom: 5px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        text-align: left;
       }
-      .stat-box div {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-main);
-        line-height: 1;
+      .btn-outline-purple {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 24px;
+        border-radius: 50px;
+        border: 1px solid rgba(197, 123, 255, 0.3);
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+        font-size: 0.85rem;
+        background: rgba(197, 123, 255, 0.05);
+        transition: all 0.2s;
+      }
+      .btn-outline-purple:hover {
+        background: rgba(197, 123, 255, 0.1);
+        color: var(--primary);
       }
 
       /* --- MOBILE STICKY BAR --- */
@@ -457,110 +465,72 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(15, 23, 42, 0.9);
+        background: rgba(13, 17, 26, 0.95);
         border-top: 1px solid var(--border);
         padding: 15px 20px calc(15px + var(--safe-bottom)) 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         z-index: 999;
-        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
         transform: translateY(100%);
         transition: transform 0.3s ease;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
       }
       
       .mobile-sticky-bar.visible {
         transform: translateY(0);
       }
-      .sticky-info {
-        display: flex;
-        flex-direction: column;
-      }
       .sticky-label {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         color: var(--text-muted);
         font-weight: 700;
         text-transform: uppercase;
+        display: block;
       }
       .sticky-value {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         font-weight: 800;
-        color: var(--primary-purple);
+        color: var(--primary);
         line-height: 1;
       }
       .sticky-credits {
-        font-size: 1rem;
+        font-size: 0.95rem;
         color: var(--text-main);
         font-weight: 600;
       }
 
       footer {
-        margin-top: auto;
-        padding: 20px 0;
-        border-top: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.02);
+        padding: 30px 0;
+        background: transparent;
       }
       .footer-link {
-        color: inherit;
+        color: var(--text-muted);
         text-decoration: none;
-        font-weight: 600;
-        font-size: 0.94rem;
+        font-weight: 500;
+        font-size: 0.8rem;
       }
 
       .developer-name {
-        color: var(--primary-purple);
-        font-weight: 700;
+        color: var(--primary);
+        font-weight: 600;
       }
 
-      /* --- SMOOTH PAGE LOAD ANIMATION --- */
-      @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-
-      .navbar { animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-      .app-container { opacity: 0; animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards; }
-      footer { opacity: 0; animation: fadeInUp 0.8s ease 0.3s forwards; }
-
-      /* --- MOBILE OPTIMIZATIONS (Tablet & Below) --- */
+      /* --- MOBILE OPTIMIZATIONS --- */
       @media (max-width: 768px) {
-        .app-container {
-          max-width: 100%;
-          margin-top: 10px;
-          padding: 0 15px; 
-        }
-        .page-header h2 { font-size: 1.5rem; }
-        .radial-progress { width: 170px; height: 170px; }
-        .radial-progress::before { width: 140px; height: 140px; }
-        .stats-bar { gap: 8px; }
-        .stat-box { padding: 12px 4px; }
-        .stat-box small { font-size: 0.65rem; }
-        .stat-box div { font-size: 1.1rem; }
-        .gpa-number { font-size: 2.4rem; }
-        .gpa-label { font-size: 0.55rem; letter-spacing: 0.5px; margin-top: 2px; }
+        .page-header h2 { font-size: 1.4rem; }
+        .radial-progress { width: 160px; height: 160px; }
+        .radial-progress::before { width: 135px; height: 135px; }
+        .stats-bar { gap: 10px; }
+        .stat-box { padding: 15px 5px; }
+        .gpa-number { font-size: 2.5rem; }
+        .card-header { padding: 16px 20px !important; }
+        .glass-card.active .card-content { padding: 0 20px 20px; }
+        
+        /* Navbar Mobile Polish */
+        .btn-primary-custom { font-size: 0.8rem; padding: 8px 16px; }
       }
 
-      /* --- SMALL MOBILE OPTIMIZATIONS (Phone) --- */
-      @media (max-width: 576px) {
-        .navbar-brand { font-size: 1.2rem; }
-        select { font-size: 16px; width: 80px; }
-        .mod-info { font-size: 0.9rem; }
-        .sticky-value { font-size: 1.3rem; }
-        .sticky-credits { font-size: 0.9rem; }
-      }
-
-      /* --- TINY SCREENS (iPhone SE 1st gen etc) --- */
-      @media (max-width: 370px) {
-        .radial-progress { width: 150px; height: 150px; }
-        .radial-progress::before { width: 125px; height: 125px; }
-        .gpa-number { font-size: 2.2rem; }
-        .page-header h2 { font-size: 1.3rem; }
-        .module-row { gap: 10px; }
-        .mod-info { font-size: 0.85rem; }
-      }
-      
       @media (min-width: 992px) {
         .mobile-sticky-bar { display: none !important; }
         body { padding-bottom: 20px; }
@@ -568,36 +538,24 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg sticky-top">
-      <div class="container">
+    
+    <nav class="navbar">
+      <div class="container app-container d-flex justify-content-between align-items-center" style="margin-bottom: 0;">
         <a class="navbar-brand" href="index.html">
           <i class="fas fa-graduation-cap"></i> FMC GPA
         </a>
-
-        <div class="d-flex align-items-center order-lg-3">
-          <a href="index.html" class="btn-primary-custom d-none d-sm-block ms-2">Back to Home</a>
-          <button
-            class="navbar-toggler ms-2"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            style="border: none; outline: none; padding: 5px;"
-          >
-            <span class="navbar-toggler-icon" style="filter: invert(1); width: 1.2em; height: 1.2em;"></span>
-          </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <div class="d-lg-none mt-3 pb-2">
-            <a href="index.html" class="btn-primary-custom w-100 d-block text-center">Back to Home</a>
-          </div>
-        </div>
+        <a href="index.html" class="btn-primary-custom">
+          <i class="fas fa-arrow-left"></i> 
+          <span class="d-none d-sm-inline ms-1">Back to Home</span>
+          <span class="d-inline d-sm-none ms-1">Back</span>
+        </a>
       </div>
     </nav>
 
     <div class="app-container">
+      
       <div class="page-header">
-        <h2>Bachelor of Science in Management and Information Technology Degree</h2>
+        <h2>Bachelor of Science in <span class="gradient-title">Management and Information Technology Degree</span></h2>
         <p>Track your GPA and check your eligibility (97 Credits).</p>
       </div>
 
@@ -612,7 +570,7 @@
           <i class="fas fa-info-circle"></i> Start Grading
         </div>
         <div id="degreeStatusAlert" class="status-alert">
-          <i class="fas fa-exclamation-triangle me-2"></i>
+          <i class="fas fa-exclamation-triangle"></i>
           <span id="statusText">Requirements not met</span>
         </div>
       </div>
@@ -634,47 +592,38 @@
 
       <div class="semester-list" id="semContainer"></div>
       
-      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-custom); margin-top: 35px; padding: 25px;">
-        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; text-align: justify;">
-          <strong>Disclaimer:</strong> This is an independent student-developed project and is not affiliated with, endorsed by, or maintained by the Faculty of Management and Commerce, South Eastern University of Sri Lanka. GPA calculations are based on the  <b>Undergraduate Guide – Academic Year 2021/2022</b>. Academic structures, subjects, and credit values may change in future years.
+      <div class="disclaimer-box">
+        <p>
+          <strong>Disclaimer:</strong> This is an independent student-developed project and is not affiliated with, endorsed by, or maintained by the Faculty of Management and Commerce, South Eastern University of Sri Lanka. GPA calculations are based on the <b>Undergraduate Guide – Academic Year 2021/2022</b>. Academic structures, subjects, and credit values may change in future years.
         </p>
-        <div class="text-center">
-          <a href="https://www.seu.ac.lk/fmc/downloads.php" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 24px; border-radius: 50px; border: 1px solid var(--border); color: var(--primary-purple); font-weight: 600; text-decoration: none; font-size: 0.9rem; background: var(--input-bg); transition: all 0.2s;">
-            <i class="fas fa-download me-2"></i> Download Official Guide
-          </a>
-        </div>
+        <a href="https://www.seu.ac.lk/fmc/downloads.php" target="_blank" class="btn-outline-purple">
+          <i class="fas fa-download me-2"></i> Download Official Guide
+        </a>
       </div>
     </div>
 
     <div class="mobile-sticky-bar" id="mobileStickyBar">
-      <div class="sticky-info">
+      <div>
         <span class="sticky-label">Current GPA</span>
         <span class="sticky-value" id="stickyGPA">0.00</span>
       </div>
       <div class="text-end">
-        <span class="sticky-label d-block">Credits</span>
+        <span class="sticky-label">Credits</span>
         <span class="sticky-credits" id="stickyCredits">0 / 97</span>
       </div>
     </div>
 
     <footer>
       <div class="container text-center">
-        <div class="text-muted fw-medium">
-          <a href="https://dinoddeshanjana.github.io/Portfolio/" target="_blank" class="footer-link">
-            &copy; 2026 FMC GPA Calculator. Developed by 
-            <span class="developer-name">
-              Dinod Deshanjana
-            </span>
-          </a>
-        </div>
+        <a href="https://dinoddeshanjana.github.io/Portfolio/" target="_blank" class="footer-link">
+          &copy; 2026 FMC GPA Calculator. Developed by 
+          <span class="developer-name">Dinod Deshanjana</span>
+        </a>
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-      // --- 1. THEME TOGGLE (Removed) ---
-      // Replaced by forcing dark mode via HTML tag and strict CSS variables
+      // Sticky Bar Scroll Logic
       window.onload = () => {
         window.addEventListener("scroll", () => {
           const hub = document.querySelector(".gpa-hub");
@@ -690,7 +639,7 @@
         });
       };
 
-      // --- 2. DATA & CONFIGURATION ---
+      // --- DATA & CONFIGURATION ---
       const gradeScale = {
         "A+": 4.0, A: 4.0, "A-": 3.7,
         "B+": 3.3, B: 3.0, "B-": 2.7,
@@ -750,28 +699,22 @@
         ],
       };
 
-      // --- 3. GENERATE UI ---
+      // --- GENERATE UI ---
       const container = document.getElementById("semContainer");
 
       Object.keys(curriculum).forEach((sem, idx) => {
         const modules = curriculum[sem];
         const isActive = idx === 0 ? "active" : "";
-
         let rowsHtml = "";
 
         modules.forEach((m) => {
           const isAux = m.aux ? 'data-aux="true"' : 'data-aux="false"';
-          let badgesHtml = "";
-          let displayName = m.n;
-
-          if (m.aux) {
-            badgesHtml += '<span class="badge-aux">Aux</span>';
-          }
+          let badgesHtml = m.aux ? '<span class="badge-aux">Aux</span>' : '';
 
           rowsHtml += `
             <div class="module-row">
                 <div class="mod-info">
-                    ${displayName} ${badgesHtml}
+                    ${m.n} ${badgesHtml}
                     <div class="mod-credits">${m.c} Credits</div>
                 </div>
                 <div>
@@ -806,7 +749,7 @@
         document.getElementById(`card-${id}`).classList.toggle("active");
       }
 
-      // --- 4. CALCULATION ENGINE (100% UNTOUCHED) ---
+      // --- CALCULATION ENGINE (UNTOUCHED) ---
       document.querySelectorAll("select").forEach((input) => {
         input.addEventListener("change", calculateDegree);
       });
@@ -930,8 +873,7 @@
 
         if (totalGPACredits === 0 && auxFailCount === 0 && auxPassCount === 0) {
           statusAlert.classList.remove("active");
-          classBadge.innerHTML =
-            '<i class="fas fa-info-circle"></i> Start Grading';
+          classBadge.innerHTML = '<i class="fas fa-info-circle"></i> Start Grading';
           return;
         }
 
@@ -950,11 +892,11 @@
             } else if (cgpa >= 3.3 && countBOrBetter >= halfCourses) {
               finalClass = "Second Upper";
               badgeIcon = "fa-medal";
-              badgeColor = "var(--primary-purple)";
+              badgeColor = "var(--primary)";
             } else if (cgpa >= 3.0 && countBOrBetter >= halfCourses) {
               finalClass = "Second Lower";
               badgeIcon = "fa-award";
-              badgeColor = "var(--secondary-purple)";
+              badgeColor = "var(--primary-dark)";
             }
           }
 
@@ -964,8 +906,7 @@
         } else {
           statusAlert.className = "status-alert active";
           statusText.innerHTML = "<strong>Pending:</strong> " + issues[0];
-          classBadge.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> In Progress';
+          classBadge.innerHTML = '<i class="fas fa-spinner fa-spin"></i> In Progress';
         }
       }
     </script>
